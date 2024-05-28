@@ -12,7 +12,7 @@ use App\Http\Controllers\API\AuthController;
 // Route::apiResource('books', BookController::class);
 
 Route::prefix("user")->group(function () {
-    Route::get('/user', function (Request $request) {
+    Route::get('/users', function (Request $request) {
         return $request->user();
     })->middleware('auth:api');
 
