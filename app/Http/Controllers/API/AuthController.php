@@ -13,7 +13,6 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
-
     /**
      *  @OA\Post(
      *      path="/api/user/register",
@@ -27,16 +26,22 @@ class AuthController extends Controller
      *      ),
      *      @OA\Response(
      *          response=201,
-     *          description="Successfull",
+     *          description="Successful",
      *          @OA\JsonContent()
      *      ),
      *      @OA\RequestBody(
      *          required=true,
      *          description="Request body description",
      *          @OA\JsonContent(
-     *              ref="#/components/schemas/User"
+     *              ref="App\Models\User",
+     *              example={
+     *                  "name": "Feliciano",
+     *                  "email": "fel@gmail.com",
+     *                  "password": "fel123_321",
+     *                  "password_confirmation": "fel123_321"
+     *              }
      *          )
-     *      ),
+     *      )
      * )
      */
     public function register(Request $request)
@@ -71,7 +76,7 @@ class AuthController extends Controller
     }
 
     /**
-     *  @OA\Post(
+     * @OA\Post(
      *      path="/api/user/login",
      *      tags={"user"},
      *      summary="Log in to existing user & get token",
@@ -82,17 +87,24 @@ class AuthController extends Controller
      *          @OA\JsonContent()
      *      ),
      *      @OA\Response(
-     *          response=201,
-     *          description="Successfull",
+     *          response=200,
+     *          description="Successful login",
+     *          @OA\JsonContent()
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthorized",
      *          @OA\JsonContent()
      *      ),
      *      @OA\RequestBody(
      *          required=true,
      *          description="Request body description",
      *          @OA\JsonContent(
-     *              ref="#/components/schemas/User"
+     *              required={"email", "password"},
+     *              @OA\Property(property="email", type="string", format="email", example="fel@gmail.com"),
+     *              @OA\Property(property="password", type="string", example="fel123_321"),
      *          )
-     *      ),
+     *      )
      * )
      */
     public function login(Request $request)
@@ -131,7 +143,7 @@ class AuthController extends Controller
     }
 
     /**
-     *  @OA\Post(
+     * @OA\Post(
      *      path="/api/user/logout",
      *      tags={"user"},
      *      summary="Log out & destroy self token",
@@ -143,19 +155,14 @@ class AuthController extends Controller
      *      ),
      *      @OA\Response(
      *          response=200,
-     *          description="Successfull",
+     *          description="Successful logout",
      *          @OA\JsonContent()
      *      ),
-     *      @OA\Parameter(
-     *          name="email",
-     *          in="path",
-     *          description="User Email",
+     *      @OA\RequestBody(
      *          required=true,
-     *          @OA\Schema(
-     *              type="string"
-     *          )
+     *          description="Request body description",
+     *          @OA\JsonContent()
      *      ),
-     *      security={{"passport_token_ready:{}, "passport":{}}}
      * )
      */
     public function logout(Request $request)

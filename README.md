@@ -84,6 +84,12 @@ MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
   php artisan key:generate
   php artisan install:api --passport
   php artisan passport:keys
+
+```
+
+> 7. If step above error, try run this
+
+```bash
   php artisan migrate
   php artisan passport:client --personal
 ```

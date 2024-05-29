@@ -39,7 +39,7 @@ return [
                  * Absolute paths to directory containing the swagger annotations are stored.
                 */
                 'annotations' => [
-                    base_path('app'),
+                    base_path('app/Http/Controllers/API'),
                 ],
 
             ],
@@ -197,7 +197,29 @@ return [
                     'name' => 'Authorization', // The name of the header or query parameter to be used.
                     'in' => 'header', // The location of the API key. Valid values are "query" or "header".
                 ],
-                */],
+                */
+                'passport_token_ready' => [
+                    'type' => 'http',
+                    'scheme' => 'bearer',
+                    'description' => 'Enter token',
+                    'name' => 'Authorization',
+                    'in' => 'header',
+                ],
+                'passport' => [
+                    'type' => 'oauth2',
+                    'description' => 'Laravel passport oauth2 security',
+                    'in' => 'header',
+                    'scheme' => 'https',
+                    'flows' => [
+                        "password" => [
+                            "authorizationUrl" => config('app.url') . 'oauth/authorize',
+                            "tokenUrl" => config('app.url') . '/oauth/token',
+                            "refreshUrl" => config('app.url') . '/oauth/refresh',
+                            "scopes" => []
+                        ]
+                    ]
+                ]
+            ],
             'security' => [
                 /*
                  * Examples of Securities
@@ -212,27 +234,6 @@ return [
                     'passport' => []
                     */],
             ],
-            'passport_token_ready' => [
-                'type' => 'http',
-                'scheme' => 'bearer',
-                'description' => 'Enter token',
-                'name' => 'Authorization',
-                'in' => 'header',
-            ],
-            'passport' => [
-                'type' => 'oauth2',
-                'description' => 'Laravel passport oauth2 security',
-                'in' => 'header',
-                'scheme' => 'https',
-                'flows' => [
-                    "password" => [
-                        "authorizationUrl" => config('app.url') . 'oauth/authorize',
-                        "tokenUrl" => config('app.url') . '/oauth/token',
-                        "refreshUrl" => config('app.url') . '/oauth/refresh',
-                        "scopes" => []
-                    ]
-                ]
-            ]
         ],
 
         /*
