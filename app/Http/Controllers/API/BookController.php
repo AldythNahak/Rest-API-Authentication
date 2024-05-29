@@ -9,7 +9,17 @@ use App\Models\Book;
 class BookController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     *  @OA\Get(
+     *      path="/api/book",
+     *      tags={"book"},
+     *      summary="Display list of items",
+     *      operationId="index",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successfull",
+     *          @OA\JsonContent()
+     *      ),
+     * )
      */
     public function index()
     {
@@ -17,7 +27,18 @@ class BookController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     *  @OA\Post(
+     *      path="/api/book",
+     *      tags={"book"},
+     *      summary="create item",
+     *      operationId="create",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successfull",
+     *          @OA\JsonContent()
+     *      ),
+     *      security={{"passport_token_ready:{}, "passport":{}}}
+     * )
      */
     public function create()
     {
@@ -25,7 +46,7 @@ class BookController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 
      */
     public function store(Request $request)
     {
@@ -34,6 +55,7 @@ class BookController extends Controller
 
     /**
      * Display the specified resource.
+     * 
      */
     public function show(string $id)
     {
@@ -41,7 +63,18 @@ class BookController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     *  @OA\Post(
+     *      path="/api/book",
+     *      tags={"book"},
+     *      summary="edit item",
+     *      operationId="edit",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successfull",
+     *          @OA\JsonContent()
+     *      ),
+     *      security={{"passport_token_ready:{}, "passport":{}}}
+     * )
      */
     public function edit(string $id)
     {
@@ -49,7 +82,18 @@ class BookController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     *  @OA\Post(
+     *      path="/api/book",
+     *      tags={"book"},
+     *      summary="update item",
+     *      operationId="update",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successfull",
+     *          @OA\JsonContent()
+     *      ),
+     *      security={{"passport_token_ready:{}, "passport":{}}}
+     * )
      */
     public function update(Request $request, string $id)
     {
@@ -57,7 +101,18 @@ class BookController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     *  @OA\Post(
+     *      path="/api/book",
+     *      tags={"book"},
+     *      summary="update item",
+     *      operationId="update",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successfull",
+     *          @OA\JsonContent()
+     *      ),
+     *      security={{"passport_token_ready:{}, "passport":{}}}
+     * )
      */
     public function destroy(string $id)
     {

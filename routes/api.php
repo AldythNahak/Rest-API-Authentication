@@ -22,14 +22,14 @@ Route::prefix("user")->group(function () {
     Route::post("/logout", [AuthController::class, "logout"])->middleware("auth:api");
 });
 
-Route::resource('books', BookController::class, [
+Route::resource('book', BookController::class, [
     "only" => [
         "index",
         "show"
     ]
 ]);
 
-Route::resource('books', BookController::class, [
+Route::resource('book', BookController::class, [
     "except" => [
         "index",
         "show"

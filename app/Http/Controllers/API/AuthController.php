@@ -13,6 +13,32 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
+
+    /**
+     *  @OA\Post(
+     *      path="/api/user/register",
+     *      tags={"user"},
+     *      summary="Register new user & get token",
+     *      operationId="register",
+     *      @OA\Response(
+     *          response=400,
+     *          description="Invalid input",
+     *          @OA\JsonContent()
+     *      ),
+     *      @OA\Response(
+     *          response=201,
+     *          description="Successfull",
+     *          @OA\JsonContent()
+     *      ),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          description="Request body description",
+     *          @OA\JsonContent(
+     *              ref="#/components/schemas/User"
+     *          )
+     *      ),
+     * )
+     */
     public function register(Request $request)
     {
         try {
@@ -44,6 +70,31 @@ class AuthController extends Controller
         }
     }
 
+    /**
+     *  @OA\Post(
+     *      path="/api/user/login",
+     *      tags={"user"},
+     *      summary="Log in to existing user & get token",
+     *      operationId="login",
+     *      @OA\Response(
+     *          response=400,
+     *          description="Invalid input",
+     *          @OA\JsonContent()
+     *      ),
+     *      @OA\Response(
+     *          response=201,
+     *          description="Successfull",
+     *          @OA\JsonContent()
+     *      ),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          description="Request body description",
+     *          @OA\JsonContent(
+     *              ref="#/components/schemas/User"
+     *          )
+     *      ),
+     * )
+     */
     public function login(Request $request)
     {
         try {
@@ -79,6 +130,34 @@ class AuthController extends Controller
         }
     }
 
+    /**
+     *  @OA\Post(
+     *      path="/api/user/logout",
+     *      tags={"user"},
+     *      summary="Log out & destroy self token",
+     *      operationId="logout",
+     *      @OA\Response(
+     *          response=400,
+     *          description="Invalid input",
+     *          @OA\JsonContent()
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successfull",
+     *          @OA\JsonContent()
+     *      ),
+     *      @OA\Parameter(
+     *          name="email",
+     *          in="path",
+     *          description="User Email",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      security={{"passport_token_ready:{}, "passport":{}}}
+     * )
+     */
     public function logout(Request $request)
     {
         try {
